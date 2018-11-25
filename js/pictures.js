@@ -2,6 +2,10 @@
 var COMMENTS_PICTURES = ['Всё отлично!', 'В целом всё неплохо. Но не всё.', 'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.', 'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.', 'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.', 'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'];
 var DESCRIPTION_PICTURES = ['Тестим новую камеру!', 'Затусили с друзьями на море', 'Как же круто тут кормят', 'Отдыхаем...', 'Цените каждое мгновенье. Цените тех, кто рядом с вами и отгоняйте все сомненья. Не обижайте всех словами......', 'Вот это тачка!'];
 var fragment = document.createDocumentFragment();
+var similarPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+var picturesList = document.querySelector('.pictures');
+var similarComment = document.querySelector('.social__comment');
+var commentsList = document.querySelector('.social__comments');
 
 var random = function (max, min) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -50,7 +54,6 @@ var generatePictures = function (pictureNum) {
   return pictures;
 };
 
-var similarPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 var renderPicture = function (picture) {
   var pictureElement = similarPictureTemplate.cloneNode(true);
 
@@ -61,8 +64,7 @@ var renderPicture = function (picture) {
   return pictureElement;
 };
 
-var picturesList = document.querySelector('.pictures');
-var renderAll = function () {
+var renderAllPictures = function () {
   var picturesAll = generatePictures(25);
 
   for (i = 0; i < pictures.length; i++) {
@@ -71,9 +73,6 @@ var renderAll = function () {
   picturesList.appendChild(fragment);
 };
 
-renderAll();
-
-var similarComment = document.querySelector('.social__comment');
 var generateComment = function () {
   var commentElement = similarComment.cloneNode(true);
 
@@ -84,8 +83,8 @@ var generateComment = function () {
 
 };
 
-var commentsList = document.querySelector('.social__comments');
 var renredComments = function () {
+  commentsList.innerHTML = '';
 
   for (i = 0; i < pictures[0].comments.length; i++) {
     fragment.appendChild(generateComment());
@@ -94,14 +93,17 @@ var renredComments = function () {
   commentsList.appendChild(fragment);
 };
 
-renredComments();
+var showBigPicture = function () {
+  document.querySelector('.big-picture').classList.remove('hidden');
+  document.querySelector('.big-picture__img > img').src = pictures[0].url;
+  document.querySelector('.likes-count').textContent = pictures[0].likes;
+  document.querySelector('.comments-count').textContent = pictures[0].comments.length;
+  document.querySelector('.social__caption').textContent = pictures[0].description;
+};
 
-document.querySelector('.big-picture').classList.remove('hidden');
-document.querySelector('.big-picture__img > img').src = pictures[0].url;
-document.querySelector('.likes-count').textContent = pictures[0].likes;
-document.querySelector('.comments-count').textContent = pictures[0].comments.length;
-document.querySelector('.social__caption').textContent = pictures[0].description;
+renderAllPictures();
+renredComments();
+showBigPicture();
 
 document.querySelector('.social__comment-count').classList.add('visually-hidden');
 document.querySelector('.comments-loader').classList.add('visually-hidden');
-
