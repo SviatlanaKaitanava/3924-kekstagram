@@ -23,7 +23,7 @@ var commentPicture = function () {
     comment[j] = ' ' + COMMENTS_PICTURES[random(5, 0)];
   }
   return (comment);
-}
+};
 
 var commentsPictures = [];
 for (i = 0; i < 25; i++) {
@@ -38,7 +38,7 @@ for (i = 0; i < 25; i++) {
 var pictures = [];
 var generatePictures = function (pictureNum) {
 
-  for (var i = 0; i < pictureNum; i++) {
+  for (i = 0; i < pictureNum; i++) {
     pictures[i] = {
       url: urlPictures[i],
       likes: likesPictures[i],
@@ -48,7 +48,7 @@ var generatePictures = function (pictureNum) {
   }
 
   return pictures;
-}
+};
 
 var similarPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 var renderPicture = function (picture) {
@@ -63,10 +63,10 @@ var renderPicture = function (picture) {
 
 var picturesList = document.querySelector('.pictures');
 var renderAll = function () {
-  var pictures = generatePictures(25);
+  var picturesAll = generatePictures(25);
 
-  for (var i = 0; i < pictures.length; i++) {
-    fragment.appendChild(renderPicture(pictures[i]));
+  for (i = 0; i < pictures.length; i++) {
+    fragment.appendChild(renderPicture(picturesAll[i]));
   }
   picturesList.appendChild(fragment);
 };
@@ -87,12 +87,12 @@ var generateComment = function () {
 var commentsList = document.querySelector('.social__comments');
 var renredComments = function () {
 
-  for (var i = 0; i < pictures[0].comments.length; i++) {
+  for (i = 0; i < pictures[0].comments.length; i++) {
     fragment.appendChild(generateComment());
   }
 
   commentsList.appendChild(fragment);
-}
+};
 
 renredComments();
 
