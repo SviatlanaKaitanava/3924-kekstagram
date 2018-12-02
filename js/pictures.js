@@ -110,11 +110,11 @@ document.querySelector('.comments-loader').classList.add('visually-hidden');
 var choicePictures = document.querySelectorAll('.picture');
 
 var clickPicture = function (numPicture) {
-  choicePictures[numPicture].addEventListener('click', function (evt) {
+  choicePictures[numPicture].addEventListener('click', function () {
     renredComments(numPicture);
     showBigPicture(numPicture);
   });
-}
+};
 
 for (var k = 0; k < choicePictures.length; k++) {
   var numPicture = k;
@@ -123,13 +123,13 @@ for (var k = 0; k < choicePictures.length; k++) {
 
 var closePopup = function (classPopup) {
   document.querySelector(classPopup).classList.add('hidden');
-}
+};
 
 document.querySelector('.big-picture__cancel').addEventListener('click', function () {
   closePopup('.big-picture');
 });
 
-document.querySelector('.big-picture').addEventListener('keydown', function(evt) {
+document.querySelector('.big-picture').addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closePopup('.big-picture');
   }
