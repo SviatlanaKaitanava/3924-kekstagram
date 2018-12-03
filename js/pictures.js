@@ -221,8 +221,6 @@ effectLevelPin.addEventListener('mousedown', function (evt) {
 
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
-    console.log(positionPin);
-    console.log(positionPinPercents);
   };
 
   document.addEventListener('mousemove', onMouseMove);
