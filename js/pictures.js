@@ -124,7 +124,6 @@ for (var k = 0; k < choicePictures.length; k++) {
 }
 
 var closePopup = function (classPopup) {
-  document.querySelector(classPopup).onfocus;
   document.querySelector(classPopup).classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
 };
