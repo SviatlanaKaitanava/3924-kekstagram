@@ -225,3 +225,73 @@ effectLevelPin.addEventListener('mousedown', function (evt) {
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 });
+
+var textHashtags = document.querySelector('.text__hashtags');
+textHashtags.addEventListener('change', function (evt) {
+  var hashtags = textHashtags.value.trim();
+  hashtags = hashtags.split(' ').filter(function (hashtag) {
+    return hashtag !== '';
+  });
+
+  var validationResult = hashTagsValidate(hashtags);
+  evt.target.setCustomValidity(validationResult);
+});
+
+var hashTagsValidate = function (hashtags) {
+  if (hashtags.length > 5) {
+    return 'Не должно быть больше 5 хэштэгов';
+  }
+
+  if (repeatTag(hashtags)) {
+    return 'Хэштеги не должны повторяться';
+  }
+
+  var result = hashtags.map(function (hashtag) {
+    return hashTagValidate(hashtag);
+  })
+    .filter(function (err) {
+      return err !== '';
+    });
+
+  if (result.length !== 0) {
+    return result[0];
+  }
+  return '';
+};
+
+var hashTagValidate = function (hashtag) {
+  hashtag = hashtag.toUpperCase();
+
+  if (hashtag.slice(0, 1) !== '#') {
+    return 'Хэштег должен начинаться с #';
+  }
+
+  if (hashtag.length > 20) {
+    return 'Не должно быть больше 20 символов в одном хэштэге';
+  }
+
+  hashtag = hashtag.slice(1);
+  if (hashtag.length < 1) {
+    return 'Хэштег не может состоять только из решетки';
+  }
+
+  if (/#/.test(hashtag)) {
+    return 'Хэштеги должны разделяться пробелами';
+  }
+
+  return '';
+};
+
+var repeatTag = function (hashtags) {
+  var tagsMap = {};
+  var validationError = false;
+  hashtags.forEach(function (hashtag) {
+    if (tagsMap.hasOwnProperty(hashtag)) {
+      validationError = true;
+    } else {
+      tagsMap[hashtag] = true;
+    }
+  });
+
+  return validationError;
+};
