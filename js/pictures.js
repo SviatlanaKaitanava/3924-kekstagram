@@ -161,14 +161,14 @@ uploadFile.addEventListener('keydown', function (evt) {
 
 var imgUploadPreview = document.querySelector('.img-upload__preview img');
 
-var setNoneFilter = function() {
+var setNoneFilter = function () {
   if (imgUploadPreview.className !== '') {
     imgUploadPreview.classList.remove(imgUploadPreview.className);
     imgUploadPreview.style.filter = 'none';
   }
 };
 
-var setImageEffect = function(effectName) {
+var setImageEffect = function (effectName) {
   imgUploadPreview.classList.add('effects__preview--' + effectName);
 
   if (effectName !== 'none') {
@@ -191,8 +191,8 @@ var effectMap = {
   none: 'none'
 };
 
-document.querySelectorAll('.effects__item').forEach(function(li) {
-  li.addEventListener('click', function(e) {
+document.querySelectorAll('.effects__item').forEach(function (li) {
+  li.addEventListener('click', function (e) {
     setNoneFilter();
     setImageEffect(e.currentTarget.children[0].value);
   });
