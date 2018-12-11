@@ -36,6 +36,7 @@
   var uploadFile = document.querySelector('#upload-file');
   uploadFile.addEventListener('change', function () {
     document.querySelector('.img-upload__overlay').classList.remove('hidden');
+    document.querySelector('.img-upload__effect-level').classList.add('visually-hidden');
   });
 
   document.querySelector('.img-upload__cancel').addEventListener('click', function () {
