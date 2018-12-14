@@ -2,13 +2,16 @@
 (function () {
   var fragment = document.createDocumentFragment();
   var picturesList = document.querySelector('.pictures');
-  var picturesAll = window.data.picture(25);
-  var renderAllPictures = function () {
-    for (var i = 0; i < picturesAll.length; i++) {
-      fragment.appendChild(window.picture(picturesAll[i]));
-    }
+
+  var onLoad = function (pictures) {
+    pictures.forEach(function (picture, index) {
+      fragment.appendChild(window.picture(pictures[index]));
+    });
     picturesList.appendChild(fragment);
   };
-  renderAllPictures();
-  window.gallery = picturesAll;
+
+  var onError = function (errorMessage) {
+    window.util.showError(errorMessage);
+  };
+  window.backend.load(onLoad, onError);
 })();
