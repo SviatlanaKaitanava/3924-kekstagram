@@ -2,7 +2,7 @@
 (function () {
   var similarPictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-  window.picture = function (picture) {
+  window.picture.createElement = function (picture) {
     var pictureElement = similarPictureTemplate.cloneNode(true);
 
     pictureElement.querySelector('.picture__img').src = picture.url;

@@ -4,8 +4,12 @@
   var picturesList = document.querySelector('.pictures');
 
   var onLoad = function (pictures) {
-    pictures.forEach(function (picture, index) {
-      fragment.appendChild(window.picture(pictures[index]));
+    pictures.forEach(function (picture) {
+      var picElement = window.picture.createElement(picture);
+      picElement.addEventListener('click', function () {
+        window.preview.showPreview(picture);
+      });
+      fragment.appendChild(picElement);
     });
     picturesList.appendChild(fragment);
   };

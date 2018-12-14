@@ -4,15 +4,11 @@
   var ENTER_KEYCODE = 13;
 
   window.util = {
-    isEscEvent: function (evt, action) {
-      if (evt.keyCode === ESC_KEYCODE) {
-        action();
-      }
-    },
-    isEnterEvent: function (evt, action) {
-      if (evt.keyCode === ENTER_KEYCODE) {
-        action();
-      }
+    ESC_KEYCODE: ESC_KEYCODE,
+    ENTER_KEYCODE: ENTER_KEYCODE,
+    closePopup: function (classPopup) {
+      document.querySelector(classPopup).classList.add('hidden');
+      document.querySelector('body').classList.remove('modal-open');
     },
     random: function (max, min) {
       return Math.floor(Math.random() * (max - min) + min);
