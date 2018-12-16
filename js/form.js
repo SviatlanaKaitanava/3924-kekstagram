@@ -18,10 +18,6 @@
   var effectLevelValue = document.querySelector('.effect-level__value');
   var textHashtags = document.querySelector('.text__hashtags');
   var textDescription = document.querySelector('.text__description');
-  var successTemplate = document.querySelector('#success').content.querySelector('.success');
-  var successElement = successTemplate.cloneNode(true);
-  var main = document.querySelector('main');
-  var successButton = document.querySelector('.success__button');
   var positionPin;
   var positionPinPercents;
 
@@ -212,29 +208,17 @@
       imgUploadPreview.style.filter = 'none';
     }
     textDescription.value = '';
-    main.appendChild(successElement);
-
-    successButton.addEventListener('click', function () {
-      successElementClose();
-    });
-    successElement.addEventListener('click', function () {
-      successElementClose();
-    });
-    successElement.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === window.util.ENTER_KEYCODE) {
-        successElementClose();
-      }
-      if (evt.keyCode === window.util.ESC_KEYCODE) {
-        successElementClose();
-      }
-    });
-  };
-
-  var successElementClose = function () {
-    successElement.style.display = 'none';
+    window.util.showSuccess();
   };
 
   var onError = function (errorMessage) {
+    imgUploadOverlay.classList.add('hidden');
+    textHashtags.value = '';
+    if (imgUploadPreview.className !== '') {
+      imgUploadPreview.classList.remove(imgUploadPreview.className);
+      imgUploadPreview.style.filter = 'none';
+    }
+    textDescription.value = '';
     window.util.showError(errorMessage);
   };
 
