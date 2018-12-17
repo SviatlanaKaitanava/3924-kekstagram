@@ -2,13 +2,20 @@
 (function () {
   var fragment = document.createDocumentFragment();
   var picturesList = document.querySelector('.pictures');
-  var picturesAll = window.data.picture(25);
-  var renderAllPictures = function () {
-    for (var i = 0; i < picturesAll.length; i++) {
-      fragment.appendChild(window.picture(picturesAll[i]));
-    }
+
+  var onLoad = function (pictures) {
+    pictures.forEach(function (picture) {
+      var picElement = window.picture.createElement(picture);
+      picElement.addEventListener('click', function () {
+        window.preview.showPreview(picture);
+      });
+      fragment.appendChild(picElement);
+    });
     picturesList.appendChild(fragment);
   };
-  renderAllPictures();
-  window.gallery = picturesAll;
+
+  var onError = function (errorMessage) {
+    window.util.showError(errorMessage);
+  };
+  window.backend.load(onLoad, onError);
 })();
