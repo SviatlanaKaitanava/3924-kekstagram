@@ -94,6 +94,18 @@
       document.addEventListener('keydown', onSuccessDocumentKeyDown);
       successElement.style.display = 'flex';
       main.addEventListener('click', onSuccessButtonClick);
+    },
+    shuffle: function (array) {
+      var m = array.length;
+      var t;
+      var i;
+      while (m) {
+        i = Math.floor(Math.random() * m--);
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+      }
+      return array;
     }
   };
 })();
