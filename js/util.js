@@ -2,6 +2,7 @@
 (function () {
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
+  var DEBOUNCE_TIME = 500;
   var similarErrorTemplate = document.querySelector('#error').content.querySelector('.error');
   var errorElement = similarErrorTemplate.cloneNode(true);
   var errorElementMessage = similarErrorTemplate.querySelector('h2');
@@ -94,6 +95,29 @@
       document.addEventListener('keydown', onSuccessDocumentKeyDown);
       successElement.style.display = 'flex';
       main.addEventListener('click', onSuccessButtonClick);
+    },
+    shuffle: function (array) {
+      var m = array.length;
+      var t;
+      var i;
+      while (m) {
+        i = Math.floor(Math.random() * m--);
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+      }
+      return array;
+    },
+    debounce: function (func) {
+      var lastTimeout = null;
+      var parameters = arguments;
+
+      if (lastTimeout) {
+        window.clearTimeout(lastTimeout);
+      }
+      lastTimeout = window.setTimeout(function () {
+        func.apply(null, parameters);
+      }, DEBOUNCE_TIME);
     }
   };
 })();

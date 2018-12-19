@@ -20,6 +20,15 @@
   var textDescription = document.querySelector('.text__description');
   var positionPin;
   var positionPinPercents;
+  var effectMap = {
+    chrome: 'grayscale(1)',
+    sepia: 'sepia(1)',
+    marvin: 'invert(100%)',
+    phobos: 'blur(3px)',
+    heat: 'brightness(3)',
+    none: 'none'
+  };
+  var form = document.querySelector('.img-upload__form');
 
   uploadFile.addEventListener('change', function () {
     imgUploadOverlay.classList.remove('hidden');
@@ -60,14 +69,6 @@
     imgUploadPreview.style.filter = effectMap[effectName];
   };
 
-  var effectMap = {
-    chrome: 'grayscale(1)',
-    sepia: 'sepia(1)',
-    marvin: 'invert(100%)',
-    phobos: 'blur(3px)',
-    heat: 'brightness(3)',
-    none: 'none'
-  };
 
   effectsItem.forEach(function (li) {
     li.addEventListener('click', function (e) {
@@ -222,7 +223,7 @@
     window.util.showError(errorMessage);
   };
 
-  var form = document.querySelector('.img-upload__form');
+
   form.addEventListener('submit', function (evt) {
     window.backend.save(new FormData(form), onLoad, onError);
     evt.preventDefault();
