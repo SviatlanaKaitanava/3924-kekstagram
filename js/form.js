@@ -8,6 +8,8 @@
   var HASHTAGS_MAX = 5;
   var HASHTAG_SYMBOL_MAX = 20;
   var STEP_SCALE = 25;
+  var SCALE_MAX = 100;
+  var SCALE_MIN = 25;
   var uploadFile = document.querySelector('#upload-file');
   var imgUploadOverlay = document.querySelector('.img-upload__overlay');
   var imgUploadCancel = document.querySelector('.img-upload__cancel');
@@ -34,10 +36,9 @@
   };
   var form = document.querySelector('.img-upload__form');
 
-
   scaleControlSmaller.addEventListener('click', function () {
     var a = parseInt(scaleControlValue.value, 10);
-    if (a !== 0) {
+    if (a !== SCALE_MIN) {
       scaleControlValue.value = (a - STEP_SCALE) + '%';
       imgUploadPreview.style.transform = 'scale(' + ((a - STEP_SCALE) / PERCENT_MAX) + ')';
     }
@@ -45,7 +46,7 @@
 
   scaleControlBigger.addEventListener('click', function () {
     var a = parseInt(scaleControlValue.value, 10);
-    if (a !== 100) {
+    if (a !== SCALE_MAX) {
       scaleControlValue.value = (a + STEP_SCALE) + '%';
       imgUploadPreview.style.transform = 'scale(' + ((a + STEP_SCALE) / PERCENT_MAX) + ')';
     }
@@ -90,7 +91,6 @@
 
     imgUploadPreview.style.filter = effectMap[effectName];
   };
-
 
   effectsItem.forEach(function (li) {
     li.addEventListener('click', function (e) {
@@ -248,7 +248,6 @@
     textDescription.value = '';
     window.util.showError(errorMessage);
   };
-
 
   form.addEventListener('submit', function (evt) {
     window.backend.save(new FormData(form), onLoad, onError);
