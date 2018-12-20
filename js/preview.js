@@ -24,7 +24,7 @@
     return commentElement;
   };
 
-  var renredComments = function (pic) {
+  var renredComments = function (picture) {
     commentsList.innerHTML = '';
     socialCommentCount.textContent = MAX_COMMENT_NUM + ' из ' + commentsCount.textContent + ' комментариев';
 
@@ -36,7 +36,7 @@
       socialCommentCount.classList.add('visually-hidden');
     }
 
-    pic.comments.slice(0, MAX_COMMENT_NUM).forEach(function (comment) {
+    picture.comments.slice(0, MAX_COMMENT_NUM).forEach(function (comment) {
       fragment.appendChild(generateComment(comment));
     });
 
@@ -44,13 +44,13 @@
     var indexComment = MAX_COMMENT_NUM;
 
     socialCommentsLoader.addEventListener('click', function () {
-      if (indexComment < pic.comments.length) {
-        pic.comments.slice(indexComment, indexComment + MAX_COMMENT_NUM).forEach(function (comment) {
+      if (indexComment < picture.comments.length) {
+        picture.comments.slice(indexComment, indexComment + MAX_COMMENT_NUM).forEach(function (comment) {
           fragment.appendChild(generateComment(comment));
         });
         commentsList.appendChild(fragment);
-        if (indexComment + MAX_COMMENT_NUM > pic.comments.length) {
-          indexComment = pic.comments.length;
+        if (indexComment + MAX_COMMENT_NUM > picture.comments.length) {
+          indexComment = picture.comments.length;
           socialCommentsLoader.classList.add('visually-hidden');
         } else {
           indexComment = indexComment + MAX_COMMENT_NUM;
@@ -60,13 +60,13 @@
     });
   };
 
-  var showBigPicture = function (pic) {
+  var showBigPicture = function (picture) {
     bigPicture.classList.remove('hidden');
     bigPicture.focus();
-    bigPictureImg.src = pic.url;
-    likesCount.textContent = pic.likes;
-    commentsCount.textContent = pic.comments.length;
-    socialCaption.textContent = pic.description;
+    bigPictureImg.src = picture.url;
+    likesCount.textContent = picture.likes;
+    commentsCount.textContent = picture.comments.length;
+    socialCaption.textContent = picture.description;
   };
 
   var initPreview = function () {
