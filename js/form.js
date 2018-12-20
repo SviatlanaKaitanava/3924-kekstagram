@@ -7,6 +7,7 @@
   var FILTER_BRIGHTNESS_MIN = 1;
   var HASHTAGS_MAX = 5;
   var HASHTAG_SYMBOL_MAX = 20;
+  var STEP_SCALE = 25;
   var uploadFile = document.querySelector('#upload-file');
   var imgUploadOverlay = document.querySelector('.img-upload__overlay');
   var imgUploadCancel = document.querySelector('.img-upload__cancel');
@@ -18,6 +19,9 @@
   var effectLevelValue = document.querySelector('.effect-level__value');
   var textHashtags = document.querySelector('.text__hashtags');
   var textDescription = document.querySelector('.text__description');
+  var scaleControlValue = document.querySelector('.scale__control--value');
+  var scaleControlSmaller = document.querySelector('.scale__control--smaller');
+  var scaleControlBigger = document.querySelector('.scale__control--bigger');
   var positionPin;
   var positionPinPercents;
   var effectMap = {
@@ -29,6 +33,23 @@
     none: 'none'
   };
   var form = document.querySelector('.img-upload__form');
+
+
+  scaleControlSmaller.addEventListener('click', function () {
+    var a = parseInt(scaleControlValue.value, 10);
+    if (a !== 0) {
+      scaleControlValue.value = (a - STEP_SCALE) + '%';
+      imgUploadPreview.style.transform = 'scale(' + ((a - STEP_SCALE) / PERCENT_MAX) + ')';
+    }
+  });
+
+  scaleControlBigger.addEventListener('click', function () {
+    var a = parseInt(scaleControlValue.value, 10);
+    if (a !== 100) {
+      scaleControlValue.value = (a + STEP_SCALE) + '%';
+      imgUploadPreview.style.transform = 'scale(' + ((a + STEP_SCALE) / PERCENT_MAX) + ')';
+    }
+  });
 
   uploadFile.addEventListener('change', function () {
     imgUploadOverlay.classList.remove('hidden');
@@ -61,6 +82,7 @@
     if (effectName !== 'none') {
       effectLevelPin.style.left = '453px';
       effectLevelDepth.style.width = '100%';
+      effectLevelValue.value = '100';
       imgUploadEffectLevel.classList.remove('visually-hidden');
     } else {
       imgUploadEffectLevel.classList.add('visually-hidden');
@@ -207,6 +229,8 @@
     if (imgUploadPreview.className !== '') {
       imgUploadPreview.classList.remove(imgUploadPreview.className);
       imgUploadPreview.style.filter = 'none';
+      imgUploadPreview.style.transform = 'scale(1)';
+      scaleControlValue.value = '100%';
     }
     textDescription.value = '';
     window.util.showSuccess();
@@ -218,6 +242,8 @@
     if (imgUploadPreview.className !== '') {
       imgUploadPreview.classList.remove(imgUploadPreview.className);
       imgUploadPreview.style.filter = 'none';
+      imgUploadPreview.style.transform = 'scale(1)';
+      scaleControlValue.value = '100%';
     }
     textDescription.value = '';
     window.util.showError(errorMessage);
