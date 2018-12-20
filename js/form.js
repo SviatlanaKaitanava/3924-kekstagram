@@ -37,18 +37,18 @@
   var form = document.querySelector('.img-upload__form');
 
   scaleControlSmaller.addEventListener('click', function () {
-    var a = parseInt(scaleControlValue.value, 10);
-    if (a !== SCALE_MIN) {
-      scaleControlValue.value = (a - STEP_SCALE) + '%';
-      imgUploadPreview.style.transform = 'scale(' + ((a - STEP_SCALE) / PERCENT_MAX) + ')';
+    var scale = parseInt(scaleControlValue.value, 10);
+    if (scale !== SCALE_MIN) {
+      scaleControlValue.value = (scale - STEP_SCALE) + '%';
+      imgUploadPreview.style.transform = 'scale(' + ((scale - STEP_SCALE) / PERCENT_MAX) + ')';
     }
   });
 
   scaleControlBigger.addEventListener('click', function () {
-    var a = parseInt(scaleControlValue.value, 10);
-    if (a !== SCALE_MAX) {
-      scaleControlValue.value = (a + STEP_SCALE) + '%';
-      imgUploadPreview.style.transform = 'scale(' + ((a + STEP_SCALE) / PERCENT_MAX) + ')';
+    var scale = parseInt(scaleControlValue.value, 10);
+    if (scale !== SCALE_MAX) {
+      scaleControlValue.value = (scale + STEP_SCALE) + '%';
+      imgUploadPreview.style.transform = 'scale(' + ((scale + STEP_SCALE) / PERCENT_MAX) + ')';
     }
   });
 
