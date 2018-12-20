@@ -23,8 +23,8 @@
   };
 
   var delGallery = function () {
-    document.querySelectorAll('.picture').forEach(function (pic) {
-      picturesList.removeChild(pic);
+    document.querySelectorAll('.picture').forEach(function (picture) {
+      picturesList.removeChild(picture);
     });
   };
 
@@ -46,25 +46,25 @@
     });
   };
 
-  filterPopular.addEventListener('click', function (e) {
+  filterPopular.addEventListener('click', function (evt) {
     window.util.debounce(function () {
-      setActiveFilterClass(e.target.id);
+      setActiveFilterClass(evt.target.id);
       delGallery();
       renderGallery(gallery);
     });
   });
 
-  filterNew.addEventListener('click', function (e) {
+  filterNew.addEventListener('click', function (evt) {
     window.util.debounce(function () {
-      setActiveFilterClass(e.target.id);
+      setActiveFilterClass(evt.target.id);
       delGallery();
       renderGallery(window.util.shuffle(gallery.slice(0)).slice(0, 10));
     });
   });
 
-  filterDiscussed.addEventListener('click', function (e) {
+  filterDiscussed.addEventListener('click', function (evt) {
     window.util.debounce(function () {
-      setActiveFilterClass(e.target.id);
+      setActiveFilterClass(evt.target.id);
       delGallery();
       var galleryNew = gallery.slice(0);
       galleryNew = galleryNew.sort(function (first, second) {

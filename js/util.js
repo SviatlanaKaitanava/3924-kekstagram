@@ -25,14 +25,14 @@
     errorElementClose();
   };
 
-  var onErrorButtonKeyDown = function (e) {
-    if (e.keyCode === ENTER_KEYCODE) {
+  var onErrorButtonKeyDown = function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
       errorElementClose();
     }
   };
 
-  var onErrorDocumentKeyDown = function (e) {
-    if (e.keyCode === ESC_KEYCODE) {
+  var onErrorDocumentKeyDown = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
       errorElementClose();
     }
   };
@@ -48,14 +48,14 @@
     successElementClose();
   };
 
-  var onSuccessButtonKeyDown = function (e) {
-    if (e.keyCode === ENTER_KEYCODE) {
+  var onSuccessButtonKeyDown = function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
       successElementClose();
     }
   };
 
-  var onSuccessDocumentKeyDown = function (e) {
-    if (e.keyCode === ESC_KEYCODE) {
+  var onSuccessDocumentKeyDown = function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
       successElementClose();
     }
   };
