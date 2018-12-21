@@ -172,7 +172,6 @@
     } else {
       textHashtags.style = 'border: none';
     }
-
   });
 
   var hashTagsValidate = function (hashtags) {
@@ -194,8 +193,8 @@
     if (result.length !== 0) {
       return result[0];
     }
-    return '';
 
+    return '';
   };
 
   var hashTagValidate = function (hashtag) {
@@ -227,15 +226,12 @@
     hashtags.forEach(function (hashtag) {
       if (tagsMap.hasOwnProperty(hashtag)) {
         validationError = true;
-
       } else {
         tagsMap[hashtag] = true;
-
       }
     });
 
     return validationError;
-
   };
 
   var onLoad = function () {
@@ -250,7 +246,6 @@
     textDescription.value = '';
     effectNone.checked = 'checked';
     effectLevelValue.value = '0';
-    textHashtags.style = 'border: none;';
     window.util.showSuccess();
   };
 
@@ -266,7 +261,6 @@
     textDescription.value = '';
     effectNone.checked = 'checked';
     effectLevelValue.value = '0';
-    textHashtags.style = 'border: none;';
     window.util.showError(errorMessage);
   };
 
