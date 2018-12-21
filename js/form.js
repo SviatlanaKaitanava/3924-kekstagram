@@ -1,6 +1,7 @@
 'use strict';
 (function () {
   var PERCENT_MAX = 100;
+  var PERCENT_MIN = 0;
   var WIDTH_SLIDER = 453;
   var FILTER_BLUR_MAX = 3;
   var FILTER_BRIGHTNESS_MAX = 3;
@@ -19,6 +20,7 @@
   var effectsItem = document.querySelectorAll('.effects__item');
   var effectLevelPin = document.querySelector('.effect-level__pin');
   var effectLevelValue = document.querySelector('.effect-level__value');
+  var effectNone = document.querySelector('#effect-none');
   var textHashtags = document.querySelector('.text__hashtags');
   var textDescription = document.querySelector('.text__description');
   var scaleControlValue = document.querySelector('.scale__control--value');
@@ -55,6 +57,7 @@
   uploadFile.addEventListener('change', function () {
     imgUploadOverlay.classList.remove('hidden');
     imgUploadEffectLevel.classList.add('visually-hidden');
+
   });
 
   imgUploadCancel.addEventListener('click', function () {
@@ -118,10 +121,13 @@
       };
 
       positionPin = effectLevelPin.offsetLeft - shift.x;
-      effectLevelPin.style.left = (positionPin) + 'px';
       positionPinPercents = Math.round(positionPin * PERCENT_MAX / WIDTH_SLIDER);
-      effectLevelValue.value = positionPinPercents;
-      document.querySelector('.effect-level__depth').style.width = effectLevelValue.value + '%';
+
+      if (positionPinPercents <= PERCENT_MAX && positionPinPercents >= PERCENT_MIN) {
+        effectLevelPin.style.left = (positionPin) + 'px';
+        effectLevelValue.value = positionPinPercents;
+        document.querySelector('.effect-level__depth').style.width = effectLevelValue.value + '%';
+      }
 
       if (imgUploadPreview.className === 'effects__preview--chrome') {
         imgUploadPreview.style.filter = 'grayscale(' + (positionPinPercents / PERCENT_MAX) + ')';
@@ -145,11 +151,9 @@
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
-
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };
-
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
@@ -162,6 +166,13 @@
 
     var validationResult = hashTagsValidate(hashtags);
     evt.target.setCustomValidity(validationResult);
+
+    if (validationResult !== '') {
+      textHashtags.style = 'border: 2px solid red';
+    } else {
+      textHashtags.style = 'border: none';
+    }
+
   });
 
   var hashTagsValidate = function (hashtags) {
@@ -184,6 +195,7 @@
       return result[0];
     }
     return '';
+
   };
 
   var hashTagValidate = function (hashtag) {
@@ -215,12 +227,15 @@
     hashtags.forEach(function (hashtag) {
       if (tagsMap.hasOwnProperty(hashtag)) {
         validationError = true;
+
       } else {
         tagsMap[hashtag] = true;
+
       }
     });
 
     return validationError;
+
   };
 
   var onLoad = function () {
@@ -233,6 +248,9 @@
       scaleControlValue.value = '100%';
     }
     textDescription.value = '';
+    effectNone.checked = 'checked';
+    effectLevelValue.value = '0';
+    textHashtags.style = 'border: none;';
     window.util.showSuccess();
   };
 
@@ -246,6 +264,9 @@
       scaleControlValue.value = '100%';
     }
     textDescription.value = '';
+    effectNone.checked = 'checked';
+    effectLevelValue.value = '0';
+    textHashtags.style = 'border: none;';
     window.util.showError(errorMessage);
   };
 
