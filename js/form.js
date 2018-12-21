@@ -170,7 +170,7 @@
     if (validationResult !== '') {
       textHashtags.style = 'border: 2px solid red';
     } else {
-      textHashtags.style = 'border: none';
+      textHashtags.style = '';
     }
   });
 
